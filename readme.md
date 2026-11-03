@@ -161,13 +161,3 @@ Criterio Peso
 Qualità del progetto 25%
 Interrogazione: risposte alle domande 25%
 Modifica dal vivo 50%
-
-Svolgimento dell’interrogazione:
-1. Demo: avvio di server e client, handshake, invio di una misura valida e di
-una non valida.
-2. Domande.
-3. Modifica dal vivo: lo studente applica una variazione richiesta dal
-docente.
-Per evitare lavori copiati, la modifica dal vivo e le domande sul codice hanno
-un peso diretto sul voto, e la cronologia dei commit viene consultata durante la
-prova.
