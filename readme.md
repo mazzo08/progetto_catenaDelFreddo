@@ -39,7 +39,6 @@ intervalli regolari.
 3. Valida il messaggio con lo schema prima di cifrarlo.
 Sicurezza
 
-1
 
 1. Scambio chiavi con Diffie-Hellman implementato dallo studente: calcolo
 di A = g^a mod p e del segreto condiviso K = B^a mod p. È ammesso
@@ -95,7 +94,6 @@ casuale a; invia A = Ga mod p.
 con B.
 3. Entrambi calcolano K = Gab mod p e derivano la chiave.
 
-2
 
 Ogni messaggio successivo viaggia in una busta con campi session_id,
 ciphertext e tag (codificati in Base64). All’interno della busta c’è il JSON
@@ -140,7 +138,6 @@ Busta cifrata effettivamente trasmessa in rete:
 "tag": "8dK2...Base64...=="
 }
 
-3
 
 Gli studenti devono scrivere gli schemi per la richiesta readings, per la sua
 risposta e per il messaggio di errore.
