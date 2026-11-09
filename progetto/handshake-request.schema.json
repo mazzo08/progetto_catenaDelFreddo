@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Handshake: richiesta del client (p, g, A in esadecimale)",
+  "type": "object",
+  "required": ["p", "g", "client_public"],
+  "properties": {
+    "p": { "type": "string", "pattern": "^[0-9a-f]{512}$" },
+    "g": { "type": "string", "pattern": "^[0-9a-f]{1,4}$" },
+    "client_public": { "type": "string", "pattern": "^[0-9a-f]{1,512}$" }
+  },
+  "additionalProperties": false
+}

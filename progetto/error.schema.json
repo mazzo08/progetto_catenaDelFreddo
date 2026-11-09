@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Messaggio di errore (il testo indica il campo sbagliato)",
+  "type": "object",
+  "required": ["status", "message"],
+  "properties": {
+    "status": { "type": "integer", "minimum": 400, "maximum": 599 },
+    "message": { "type": "string" }
+  },
+  "additionalProperties": false
+}

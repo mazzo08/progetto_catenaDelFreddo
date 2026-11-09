@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Conferma (ack) con eventuale allarme; usata anche per la chiusura",
+  "type": "object",
+  "required": ["status"],
+  "properties": {
+    "status": { "enum": ["ok", "closed"] },
+    "alarm": { "type": "boolean" }
+  },
+  "additionalProperties": false
+}
