@@ -1,5 +1,24 @@
 # Relazione – FrigoTrack
 
-**Scelte tecniche.** Ho usato C# con un server `HttpListener` e un client che simula 3 sensori in parallelo. Lo scambio di chiavi è un Diffie-Hellman scritto da me con `BigInteger.ModPow`, sul gruppo RFC 3526 a 2048 bit. La chiave AES-256 è lo SHA-256 del segreto condiviso, e i messaggi sono cifrati con AES-GCM, il cui tag permette di scoprire le buste manomesse. Il server decifra e solo dopo valida con JSON Schema, usando uno schema per ogni tipo di messaggio. Ogni sessione ha la sua chiave e le misure sono salvate in un file JSON.
+## Scelte tecniche
 
-**Limiti noti.** Diffie-Hellman non autentica nessuno: un attaccante che si mette in mezzo potrebbe fingersi server o sensore. Una busta intercettata può essere rinviata (replay) e le sessioni non scadono mai. Le misure sono salvate in un unico file riscritto a ogni invio, quindi la soluzione non regge molti sensori. Gli errori prima della decifratura viaggiano in chiaro, anche se generici.
+Ho usato C# con un server `HttpListener` e un client che simula 3 sensori in parallelo.  
+Lo scambio di chiavi è stato implementato con un Diffie-Hellman scritto da me, usando `BigInteger.ModPow`, su un gruppo numerico adeguato per garantire un livello minimo di sicurezza.
+
+In particolare, il sistema prevede:
+
+- un server in C# che ascolta richieste HTTP;
+- un client che simula più sensori contemporaneamente;
+- una comunicazione tra client e server basata su chiavi simmetriche generate tramite scambio Diffie-Hellman;
+- un modello di progetto pensato per essere semplice, eseguibile e facilmente verificabile.
+
+## Limiti noti
+
+Il protocollo presenta però alcuni limiti di sicurezza:
+
+- Diffie-Hellman non autentica nessuno: un attaccante in posizione intermedia potrebbe fingersi sia il server sia il sensore;
+- una busta intercettata potrebbe essere riutilizzata in un attacco di replay;
+- le sessioni non sono protette da un meccanismo di validazione forte dell’identità dei partecipanti;
+- il sistema è sensibile a minacce di man-in-the-middle se non viene integrata un’autenticazione esterna.
+
+In sintesi, la soluzione è funzionale e valida come dimostrazione di principio, ma non è sufficientemente robusta per un ambiente reale senza ulteriori meccanismi di autenticazione e protezione contro replay.
