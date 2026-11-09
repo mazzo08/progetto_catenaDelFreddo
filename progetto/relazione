@@ -1,0 +1,5 @@
+# Relazione – FrigoTrack
+
+**Scelte tecniche.** Ho usato C# con un server `HttpListener` e un client che simula 3 sensori in parallelo. Lo scambio di chiavi è un Diffie-Hellman scritto da me con `BigInteger.ModPow`, sul gruppo RFC 3526 a 2048 bit. La chiave AES-256 è lo SHA-256 del segreto condiviso, e i messaggi sono cifrati con AES-GCM, il cui tag permette di scoprire le buste manomesse. Il server decifra e solo dopo valida con JSON Schema, usando uno schema per ogni tipo di messaggio. Ogni sessione ha la sua chiave e le misure sono salvate in un file JSON.
+
+**Limiti noti.** Diffie-Hellman non autentica nessuno: un attaccante che si mette in mezzo potrebbe fingersi server o sensore. Una busta intercettata può essere rinviata (replay) e le sessioni non scadono mai. Le misure sono salvate in un unico file riscritto a ogni invio, quindi la soluzione non regge molti sensori. Gli errori prima della decifratura viaggiano in chiaro, anche se generici.
